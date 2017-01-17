@@ -21,6 +21,8 @@ The following **optional** features are implemented:
 
 ## Pictures of website
 
+Sign in:
+<img src='http://i.imgur.com/Ptw0PS4.png' title='Sign in' width='' alt='Sign in' />
 
 
 ## How to run (On Local):
