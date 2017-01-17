@@ -16,7 +16,7 @@ The following **required** functionality is complete:
 
 
 The following **optional** features are implemented:
-* [x] I made it so only users have access to the website (made mnore sense to me)
+* [x] I made it so only users have access to the website (made more sense to me)
 * [x] Implemented front-end using bootstrap and custom css
 
 ## Pictures of website
