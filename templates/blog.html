@@ -1,0 +1,109 @@
+{% extends "front.html" %}
+{% block content %}
+  <div class="container">
+    <div class ="row">
+      <div class="col-md-12 text-center">
+        <h1>CS Blog</h1>
+      </div>
+    </div>
+    <div class="row">
+      <hr class="header-bar">
+    </div>
+  </div>
+
+  <div class="container posts">
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a href="/blog/newpost">
+          <button type="button" class="btn btn-default newpost-button">New Post</button>
+        </a>
+      </div>
+      <div class="col-md-12">
+      {% for p in posts %}
+        <div class="post">
+          <div class="dropdown text-right">
+            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-chevron-down"></span></a>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                {% if username != p.user %}
+                  <li class="editmenu-item">Only the creator can edit/delete</li>
+                {% else %}
+                  <a data-toggle="modal" data-id="{{p.key()}}" class="addinfo" href="#edit">
+                    <li class="editmenu-item"><span class="glyphicon glyphicon-pencil"></span> Edit</li>
+                  </a>
+                  <a data-toggle="modal" data-id="{{p.key()}}" class="addinfo" href="#delete">
+                      <li class="editmenu-item"><span class="glyphicon glyphicon-remove"></span> Delete</li>
+                  </a>
+                {% endif %}
+              </ul>
+          </div>
+          {{ p.render() | safe }}
+          <form method="post">
+            <div class="row">
+              <div class="col-md-12">
+                <a href="/blog/{{p.key().id()}}"><button name="comment" type="button" class="btn btn-default post-button" value={{p.subject}}>Comments ({{p.comments|length}})</button></a>
+                {% if username == p.user %}
+                  <div class="text-center cant-like">Like ({{p.likes|length}})</div>
+                {% elif username in p.likes %}
+                  <button name="unlike" type="submit" class="btn btn-default unlike-button" value={{p.key()}}>Unlike ({{p.likes|length}})</button>
+                {% else  %}
+                  <button name="like" type="submit" class="btn btn-default post-button" value={{p.key()}}>Like ({{p.likes|length}})</button>
+                {% endif %}
+              </div>
+            </div>
+          </form>
+        </div>
+          <br><br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="myModalLabel">Change Post</h2>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post">
+                        <label>
+                            <div>New Subject</div>
+                            <input type="text" name="newsubject">
+                        </label>
+
+                        <h2 class="text-center" style="margin: 0">OR</h2>
+
+                        <label>
+                          <div>New Content</div>
+                          <textarea name="newcontent" class="content"></textarea>
+                        </label>
+
+                        <button name="save" type="submit" class="btn btn-default modal-button" id="info" value="">Save</button>
+                      </form>
+                      <button type="button" class="btn btn-default modal-button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="myModalLabel">Are you sure? (Content will be forever lost)</h2>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post">
+                        <button name="delete" type="submit" class="btn btn-default modal-button" id="info" value="">Delete</button>
+                      </form>
+                      <button type="button" class="btn btn-default modal-button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

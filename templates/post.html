@@ -1,0 +1,25 @@
+<div class="information">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="subject text-center">
+          {{p.subject}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="post-information text-right">
+        Created by {{p.user}} on {{p.created.strftime("%b %d %Y %I:%M:%S %p")}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="post-content">
+        {{p._render_text | safe}}
+      </div>
+    </div>
+  </div>
+</div>

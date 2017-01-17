@@ -1,0 +1,110 @@
+{% extends "front.html" %}
+
+{% block content %}
+  <div class="container posts">
+      {{post.render() | safe}}
+  </div>
+
+  <div class="container posts">
+    <div class="subject text-center">
+        Comments
+    </div>
+    {% for comment in comments %}
+    <div class="information" style="padding-bottom: 0;">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="subject text-left">
+              {{comment.user}}
+              <span class="post-information ">({{comment.created.strftime("%b %d %Y %I:%M:%S %p")}})</span>
+              :
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="dropdown text-right">
+            <a class="dropdown-toggle btn" style="border: 0;" data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-chevron-down"></span></a>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                {% if username != comment.user %}
+                  <li class="editmenu-item">Only the creator can edit/delete</li>
+                {% else %}
+                  <a data-toggle="modal" data-id="{{comment.key()}}" class="addinfo" href="#editcomment">
+                    <li class="editmenu-item"><span class="glyphicon glyphicon-pencil"></span> Edit</li>
+                  </a>
+                  <a data-toggle="modal" data-id="{{comment.key()}}" class="addinfo" href="#deletecomment">
+                      <li class="editmenu-item"><span class="glyphicon glyphicon-remove"></span> Delete</li>
+                  </a>
+                {% endif %}
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="post-content">
+            {{comment.comment | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class=comment-bar>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editcomment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel">Change Comment</h2>
+          </div>
+          <div class="modal-body">
+            <form method="post">
+
+              <label>
+                <div>New Comment</div>
+                <textarea name="newcomment" class="content"></textarea>
+              </label>
+
+              <button name="editcomment" type="submit" class="btn btn-default modal-button" id="info" value="">Save</button>
+            </form>
+            <button type="button" class="btn btn-default modal-button" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deletecomment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel">Are you sure? (Content will be forever lost)</h2>
+          </div>
+          <div class="modal-body">
+            <form method="post">
+              <button name="deletecomment" type="submit" class="btn btn-default modal-button" id="info" value="">Delete</button>
+            </form>
+            <button type="button" class="btn btn-default modal-button" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      {% endfor %}
+    <form method="post">
+      <div class="row">
+        <div class="col-md-12">
+          <textarea name="comment" class="comment" placeholder="Leave a comment"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <div class="error">{{error}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button name="postcomment" class="btn btn-default newpost-button">Comment</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

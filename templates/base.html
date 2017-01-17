@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/static/css/form.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/css/img/top.png"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/creative.js"></script>
+    <title>CS Blog</title>
+  </head>
+
+  <div class="login-page">
+    <div class="form">
+      <h1 class="header">CS Blog</h1>
+      <pre><div class="error">{{error}}</div></pre>
+      <form class="register-form" method="post">
+        <input type="text" name="newusername" placeholder="username*"/>
+        <input type="password"  name="newpassword" placeholder="password*"/>
+        <input type="password"  name="verify" placeholder="re-type password*"/>
+        <input type="text"  name="email" placeholder="email address"/>
+        <button name="create">create</button>
+        <p class="message">Already registered? <a href="#">Sign In</a></p>
+      </form>
+      <form class="login-form" method="post">
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password"name="password" placeholder="password"/>
+        <button name="login">login</button>
+        <p class="message">Not registered? <a href="#">Create an account</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/creative.js"></script>
+
+</html>

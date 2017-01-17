@@ -1,0 +1,43 @@
+{% extends "front.html" %}
+
+{% block content %}
+
+    <form method="post">
+      <div class="container new-post">
+        <h2 class="text-center">New Post</h2>
+        <div class="row">
+          <hr class="newpost-bar">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label>
+              <div>Subject</div>
+              <input type="text" name="subject" value="{{subject}}">
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label>
+              <div>Content</div>
+              <textarea name="content" class="content">{{content}}</textarea>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <div class="error">{{error}}</div>
+          </div>
+        </div>
+
+        <div class="row" style="float: right;">
+          <div class="col-md-12 text-right">
+            <button name="cancel" class="btn btn-default newpost-button">Cancel</button>
+            <button name="post" class="btn btn-default newpost-button">Post</button>
+          </div>
+        </div>
+      </div>
+    </form>
+{% endblock %}
