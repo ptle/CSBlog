@@ -24,14 +24,14 @@ The following **optional** features are implemented:
 
 
 ## How to run 
-(On local)
+(On local):
 1. Make sure Python is downloaded. If not downloaded, go to https://www.python.org/downloads/ to download
 2. Download CS Blog repository to computer 
 3. Navigate to the folder using powershell or terminal.
 4. Run command ("dev_appserver.py app.yaml")
 5. Open http://localhost:8080/ on browser to view.
 
-(Website)
+(Website):
 1. The website is also live at: https://csblog-155922.appspot.com/
 
 ## Notes
