@@ -24,6 +24,23 @@ The following **optional** features are implemented:
 Sign in:
 <img src='http://i.imgur.com/Ptw0PS4.png' title='Sign in' width='' alt='Sign in' />
 
+Create account:
+<img src='http://i.imgur.com/cg0Tjjo.png' title='Create account' width='' alt='Create Account' />
+
+Main Page:
+<img src='http://i.imgur.com/ewc97fT.png' title='Main page' width='' alt='Main Page' />
+
+New Post Page:
+<img src='http://i.imgur.com/Rj5gqJC.png' title='New Post' width='' alt='New Post' />
+
+Post Page:
+<img src='http://i.imgur.com/46is1LB.png' title='Post page' width='' alt='Post Page' />
+
+Edit/Delete:
+<img src='http://i.imgur.com/aWnVuS9.png' title='Edit/Delete' width='' alt='Edit/Delete' />
+
+Logout:
+<img src='http://i.imgur.com/KFV9z9r.png' title='Logout' width='' alt='Logout' />
 
 ## How to run (On Local):
 1. Make sure Python is downloaded. If not downloaded, go to https://www.python.org/downloads/ to download
