@@ -39,6 +39,15 @@ Post Page:
 Edit/Delete:
 <img src='http://i.imgur.com/aWnVuS9.png' title='Edit/Delete' width='' alt='Edit/Delete' />
 
+Users Cannot Like their own post(greyed out):
+<img src='http://i.imgur.com/TMLab0F.png' title='Cannot like self' width='' alt='Cannot like' />
+
+Users Cannot edit/delete other's content:
+<img src='http://i.imgur.com/yqeWP7D.png' title='Cannot edit/delete post that is not theirs' width='' alt='Cannot edit/delete post that is noth theirs' />
+
+Users Cannot edit/delete other's comments:
+<img src='http://i.imgur.com/yqeWP7D.png' title='Cannot edit/delete comment that is not theirs' width='' alt='Cannot edit/delete comment that is not theirs' />
+
 Logout:
 <img src='http://i.imgur.com/KFV9z9r.png' title='Logout' width='' alt='Logout' />
 
@@ -46,8 +55,9 @@ Logout:
 1. Make sure Python is downloaded. If not downloaded, go to https://www.python.org/downloads/ to download
 2. Download CS Blog repository to computer 
 3. Navigate to the folder using powershell or terminal.
-4. Run command ("dev_appserver.py app.yaml")
-5. Open http://localhost:8080/ on browser to view.
+4. Install google app engine
+5. Run command ("dev_appserver.py app.yaml")
+6. Open http://localhost:8080/ on browser to view.
 
 ## Website:
 1. The website is also live at: https://csblog-155922.appspot.com/
