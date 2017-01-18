@@ -196,7 +196,7 @@ class MainPage(BlogHandler):
                 self.render('base.html', error=msg)
 
         # For when user is signing up for first time
-    elif create is not None:
+        elif create is not None:
             # Checks for various possible errors
             have_error = False
             self.username = self.request.get('newusername')
@@ -272,36 +272,41 @@ class BlogFront(BlogHandler):
         if like is not None:
             post = db.get(like)
 
-            # Uses if condition in case user presses button
-            # twice before loading
-            if self.user.name not in post.likes:
-                post.likes.append(self.user.name)
-                post.put()
+            if post:
+                # Uses if condition in case user presses button
+                # twice before loading
+                if self.user.name != post.user:
+                    if self.user.name not in post.likes:
+                        post.likes.append(self.user.name)
+                        post.put()
         elif unlike is not None:
             post = db.get(unlike)
-
-            # Uses if condition in case user presses button
-            # twice before loading
-            if self.user.name in post.likes:
-                post.likes.remove(self.user.name)
-                post.put()
+            if post:
+                # Uses if condition in case user presses button
+                # twice before loading
+                if self.user.name in post.likes:
+                    post.likes.remove(self.user.name)
+                    post.put()
         elif delete is not None:
             post = db.get(delete)
             if post:
-                post.delete()
+                if self.user.name == post.user:
+                    post.delete()
         elif save is not None:
             post = db.get(save)
-            newsubject = self.request.get('newsubject')
-            newcontent = self.request.get('newcontent')
+            if post:
+                if self.user.name == post.user:
+                    newsubject = self.request.get('newsubject')
+                    newcontent = self.request.get('newcontent')
 
-            # Only updates subject or content if they are not
-            # blank. If it is blank we
-            # keep the old subject/comment
-            if newsubject:
-                post.subject = newsubject
-            if newcontent:
-                post.content = newcontent
-            post.put()
+                    # Only updates subject or content if they are not
+                    # blank. If it is blank we
+                    # keep the old subject/comment
+                    if newsubject:
+                        post.subject = newsubject
+                    if newcontent:
+                        post.content = newcontent
+                    post.put()
 
         # Sleep before redirecting because I ran into the
         # problem that the page reloaded
@@ -397,23 +402,26 @@ class PostPage(BlogHandler):
         if editcomment is not None:
             # Finds comment since all buttons give comment key and updates
             # the comment
-            newcomment = self.request.get('newcomment')
-            if newcomment:
-                c = db.get(editcomment)
-                c.comment = newcomment
-                c.put()
-            time.sleep(0.1)
-            self.redirect('/blog/%s' % str(post.key().id()))
+            c = db.get(editcomment)
+            if c:
+                if self.user.name == c.user:
+                    newcomment = self.request.get('newcomment')
+                    if newcomment:
+                        c.comment = newcomment
+                        c.put()
+                    time.sleep(0.1)
+                    self.redirect('/blog/%s' % str(post.key().id()))
         elif deletecomment is not None:
             # Finds comment same as edit, but deletes instead
             c = db.get(deletecomment)
             if c:
-                # Also have to delete comment key  from the post.comments
-                c.delete()
-                post.comments.remove(str(c.key()))
-                post.put()
-            time.sleep(0.1)
-            self.redirect('/blog/%s' % str(post.key().id()))
+                if self.user.name == c.user:
+                    # Also have to delete comment key  from the post.comments
+                    c.delete()
+                    post.comments.remove(str(c.key()))
+                    post.put()
+                time.sleep(0.1)
+                self.redirect('/blog/%s' % str(post.key().id()))
         elif postcomment is not None:
             comment = self.request.get('comment')
 
